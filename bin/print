@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "britecore_printer"
+
+britecore_dir = ARGV[0]
+printer = ARGV[1]
+
+BritecorePrinter.print(britecore_dir,printer)
