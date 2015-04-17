@@ -17,7 +17,7 @@ class BritecoreDoc
     path_split = path.split(" - ",0)
     date_split = path_split[0]
     month,day,year = date_split.split("_")[1].split("-") 
-    @print_date = "#{year.strip()}-#{month}-#{day}" 
+    @print_date = "#{year.to_s.strip()}-#{month}-#{day}" 
   end
   
   def terminal_path

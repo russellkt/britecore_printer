@@ -22,8 +22,9 @@ class BritecoreDocDir
     Dir.entries(dir).select{|f| !f.start_with?(".") && File.directory?("#{dir}/#{f}") }
   end
   
+  #TODO Create better and more robust method to get valid files
   def valid_files dir
-    Dir.entries(dir).select{|f| !File.directory?("#{dir}/#{f}") }
+    Dir.entries(dir).select{|f| f =~ /^[0-9]/; }
   end
   
   def policy_numbers
@@ -47,12 +48,12 @@ class BritecoreDocDir
           bdoc = BritecoreDoc.new( policy_number, 
                                   f,
                                   File.join(path,policy_number,f)
-                                  ) unless File.directory?("#{path}/#{policy_number}/#{f}")
+                                  )                     
           max_date = bdoc.print_date if bdoc.print_date > max_date                        
           bdoc.print_date = max_date 
           add_doc(bdoc)                                
-        rescue
-          puts "unable to print #{path}"
+        rescue Exception => e
+          puts e.message
         end
       end
     end
